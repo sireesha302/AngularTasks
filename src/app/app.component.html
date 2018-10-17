@@ -1,20 +1,120 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<mat-toolbar>
+  <mat-toolbar-row color="primary">
+    <span >These are Some components in Angular</span>
+  </mat-toolbar-row>
+  <mat-toolbar-row color="primary">
+    <span >Welicome to Everyone</span>
+  </mat-toolbar-row>
+</mat-toolbar>
 
+<div style="margin-left: 200px">  
+    <button mat-raised-button color="primary" (click)="addItem()">Add More</button>&nbsp;&nbsp; 
+        <mat-form-field >
+            <input type="text" placeholder="Pick one"  matInput [formControl]="myControl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+            <mat-datepicker  #picker></mat-datepicker>
+        </mat-form-field>
+        <!--Expansion Panel-->
+        <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Personal data
+                </mat-panel-title>
+                <mat-panel-description>
+                  Type your name and Id
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-form-field>
+                <input matInput placeholder="Enter your Name">
+              </mat-form-field>       
+              <mat-form-field>
+                <input matInput placeholder="Id">
+              </mat-form-field>
+            </mat-expansion-panel>
+            <mat-expansion-panel >
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                 Other Details
+                </mat-panel-title>
+                <mat-panel-description>
+                 Enter your details
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-form-field>
+                <input matInput placeholder="Enter your Address">
+              </mat-form-field>
+              <mat-radio-group>
+                <mat-radio-button value="1" name="gender">Male</mat-radio-button>
+                <mat-radio-button value="2" name="gender">Female</mat-radio-button>
+              </mat-radio-group>
+            </mat-expansion-panel>
+          </mat-accordion>
+          <!--Grid List Module-->
+          <mat-grid-list cols="2" rowHeight="60px" >
+            <mat-grid-tile>ABC</mat-grid-tile>
+            <mat-grid-tile>DEF</mat-grid-tile>
+            <mat-grid-tile>GHI</mat-grid-tile>
+            <mat-grid-tile>JKL</mat-grid-tile>
+          </mat-grid-list>
+
+          <!--Mat Tabs Module-->
+          <mat-tab-group>
+            <mat-tab label="first">First Tab</mat-tab>
+            <mat-tab label="second">Second Tab</mat-tab>
+            <mat-tab label="third">
+              <button mat-raised-button color="primary">Third</button>
+            </mat-tab>
+          </mat-tab-group>
+       <!--Dialog Boxes...-->
+       <br><br>
+          <mat-form-field>
+            <input matInput [(ngModel)]="name" placeholder="What's your name">
+          </mat-form-field> <br>
+          <button mat-raised-button (click)="openDialog()">Pick one</button><br>
+
+          <!--Progress Spinner-->
+          <mat-radio-group [(ngModel)]="mode">
+            <mat-radio-button value="determinate" >Determinate</mat-radio-button>
+          <mat-radio-button value="indeterminate">InDeterminate</mat-radio-button>
+          </mat-radio-group>         
+            <div *ngIf = "mode==='determinate'">
+                <mat-slider min="1" max="100" step="25" [(ngModel)]="value"></mat-slider>
+                <!--Spinner-->
+              <mat-progress-spinner [value]="value"></mat-progress-spinner>
+            </div>
+            <div *ngIf= "mode==='indeterminate'">
+              <mat-spinner></mat-spinner>
+            </div>
+
+            <!--Paginator Module-->
+            <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5,25,50,75,100]"></mat-paginator>"
+    
+           
+
+            <!--Dynamic Form-->
+   <form [formGroup]="dynamicform" >   
+    <div formArrayName="AddingMore" *ngFor="let item of AddingMore.controls">
+        <h3>Employee Id</h3>
+        <input type="text" formControlName="empID" />
+        <h3>Employee Name</h3>
+        <input type="text" formControlName="empName" />
+        <h3>Gender</h3>
+        <input type="radio" formControlName="gender" value="Male" name="gender">Male
+        <input type="radio" formControlName="gender" value="female" name="gender">Female
+        <h3>Select Language</h3>
+        <select formControlName="Lang">
+          <option value="Telugu" >Telugu</option>
+          <option value="English">English</option>
+        </select>
+      </div>
+   </form>
+  </div>
